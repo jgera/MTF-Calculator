@@ -29,6 +29,8 @@ const ChargesBreakdown = ({ breakdown }) => {
                 <ChargeRow label="Stamp Duty" value={breakdown.stampDuty} />
                 <ChargeRow label="DP Charges" value={breakdown.dpCharges} />
                 <ChargeRow label="Pledge / Unpledge Charges" value={breakdown.pledgeCharges} />
+                <div className="my-2 border-t border-gray-100"></div>
+                <ChargeRow label="Transaction Charges" value={breakdown.transactionCharges} />
                 <ChargeRow label="Interest Amount" value={breakdown.interest} />
                 <div className="flex justify-between items-center pt-4 mt-2 border-t border-gray-100">
                     <span className="font-bold text-gray-800">Total Tax & Charges</span>

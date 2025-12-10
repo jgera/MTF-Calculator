@@ -26,7 +26,7 @@ const InputSection = ({ values, onChange }) => {
 
     return (
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-6">
-            <div className="grid grid-cols-1 md:grid-cols-6 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-7 gap-6">
                 <div className="md:col-span-2">
                     <InputField
                         label="Find the Stock or ETFs"
@@ -42,12 +42,34 @@ const InputSection = ({ values, onChange }) => {
                     onChange={(v) => handleChange('buyPrice', Number(v))}
                     prefix="₹"
                 />
-                <InputField
-                    label="Sell Price"
-                    value={values.sellPrice}
-                    onChange={(v) => handleChange('sellPrice', Number(v))}
-                    prefix="₹"
-                />
+                <div className="flex gap-2 md:col-span-2">
+                    <div className="flex-1">
+                        <InputField
+                            label="Sell Price"
+                            value={values.sellPrice}
+                            onChange={(v) => {
+                                const newSellPrice = Number(v);
+                                const buyPrice = values.buyPrice || 0;
+                                const percentage = buyPrice > 0 ? ((newSellPrice - buyPrice) / buyPrice) * 100 : 0;
+                                onChange({ ...values, sellPrice: newSellPrice, sellPricePercentage: percentage.toFixed(2) });
+                            }}
+                            prefix="₹"
+                        />
+                    </div>
+                    <div className="w-24">
+                        <InputField
+                            label="Change %"
+                            value={values.sellPricePercentage || ''}
+                            onChange={(v) => {
+                                const percentage = Number(v);
+                                const buyPrice = values.buyPrice || 0;
+                                const newSellPrice = buyPrice + (buyPrice * percentage / 100);
+                                onChange({ ...values, sellPrice: Number(newSellPrice.toFixed(2)), sellPricePercentage: v });
+                            }}
+                            prefix="%"
+                        />
+                    </div>
+                </div>
                 <InputField
                     label="Quantity"
                     value={values.quantity}

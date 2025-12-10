@@ -29,24 +29,26 @@ const SummaryCard = ({ results }) => {
 
                 <SummaryItem label="Buy Value" value={results.buyValue} />
                 <SummaryItem label="Sell Value" value={results.sellValue} />
-                <SummaryItem label="Gross Profit" value={results.grossProfit} isGreen={results.grossProfit > 0} />
+                <SummaryItem
+                    label="Gross Profit"
+                    value={`${formatCurrency(results.grossProfit)} (${results.grossProfitPercentage}%)`}
+                    isGreen={results.grossProfit > 0}
+                />
 
                 <SummaryItem label="Transaction Charges" value={results.transactionCharges} />
                 <SummaryItem label="Interest Amount" value={results.interestAmount} />
                 <SummaryItem label="Net Profit" value={results.netProfit} isGreen={results.netProfit > 0} isLarge />
             </div>
 
-            <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-100 flex flex-col md:flex-row justify-between items-center gap-4">
-                <div className="flex flex-col items-center md:items-start">
+            <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-100 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                <div className="flex flex-col items-center md:items-start border-b md:border-b-0 md:border-r border-green-200 pb-4 md:pb-0 md:pr-4">
                     <span className="text-sm text-gray-600">Breakeven</span>
                     <span className="text-xl font-bold text-gray-900">{results.breakevenPercentage}%</span>
                 </div>
-                <div className="h-8 w-px bg-green-200 hidden md:block"></div>
-                <div className="flex flex-col items-center md:items-start">
+                <div className="flex flex-col items-center md:items-start border-b md:border-b-0 md:border-r border-green-200 pb-4 md:pb-0 md:pr-4">
                     <span className="text-sm text-gray-600">Returns without MTF (%)</span>
                     <span className="text-xl font-bold text-gray-900">{results.returnsWithoutMTF}%</span>
                 </div>
-                <div className="h-8 w-px bg-green-200 hidden md:block"></div>
                 <div className="flex flex-col items-center md:items-start">
                     <span className="text-sm text-gray-600">Returns with MTF (%)</span>
                     <span className="text-2xl font-bold text-green-600">{results.returnsWithMTF}%</span>

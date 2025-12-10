@@ -10,6 +10,7 @@ const Calculator = () => {
         stockName: 'HDFC Bank',
         buyPrice: 1000,
         sellPrice: 1030,
+        sellPricePercentage: 3.00,
         quantity: 100,
         holdingPeriod: 50,
     });
@@ -49,6 +50,7 @@ const Calculator = () => {
         const sellValue = sellPrice * quantity;
         const turnover = buyValue + sellValue;
         const grossProfit = sellValue - buyValue;
+        const grossProfitPercentage = buyValue > 0 ? (grossProfit / buyValue) * 100 : 0;
 
         // Margin & Loan
         // Leverage 4x means you pay 25% (1/4), Loan is 75%
@@ -96,7 +98,9 @@ const Calculator = () => {
             loanAmount,
             buyValue,
             sellValue,
+            sellValue,
             grossProfit,
+            grossProfitPercentage: grossProfitPercentage.toFixed(2),
             transactionCharges: totalFees,
             totalCharges: totalCost,
             interestAmount,
@@ -115,6 +119,7 @@ const Calculator = () => {
                 stampDuty,
                 dpCharges,
                 pledgeCharges,
+                transactionCharges: totalFees,
                 interest: interestAmount,
                 totalCharges: totalCost
             }
