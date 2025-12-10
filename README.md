@@ -1,16 +1,37 @@
-# React + Vite
+﻿# MTF Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite single-page calculator for modeling Margin Trading Facility (MTF) scenarios. Tweak leverage, interest, taxes, and holding periods to see how fees and financing impact delivery trades.
 
-Currently, two official plugins are available:
+## Screenshot
+![MTF Calculator](mtf-calculator.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Adjustable inputs for buy/sell prices, quantity, and holding period with automatic % change link between price and percentage.
+- Configurable leverage, daily interest rate, and tax rate to reflect your broker or personal assumptions.
+- Summary of margin required, loan amount, gross vs net profit, returns with/without MTF, and breakeven percentage.
+- Detailed charges breakdown (brokerage, exchange txn, STT, GST, SEBI, stamp duty, DP, pledge, interest) plus total fees.
+- Taxation helper that applies long/short-term logic and lets you override the tax rate.
+- Prebuilt single-file bundle in `dist/index.html` for easy sharing or static hosting.
 
-## React Compiler
+## Quick start
+- Node.js 18+
+- Install: `npm install`
+- Dev server: `npm run dev` (Vite, with fast reloads)
+- Lint: `npm run lint`
+- Build: `npm run build` (outputs `dist/index.html` + assets; current repo already includes a built bundle)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Run the built file
+- Local: open `dist/index.html` directly in your browser (it is self contained via `vite-plugin-singlefile`).
+- Preview server: `npm run preview` after `npm run build` to serve the production bundle.
+- GitHub: once pushed, you can use the Raw link for the file (e.g. `https://raw.githubusercontent.com/<your-username>/MTF-Calculator/main/dist/index.html`) or a static host/CDN of your choice.
 
-## Expanding the ESLint configuration
+## Calculator inputs and outputs
+- Inputs: stock/ETF name (label only), buy price, sell price or % change, quantity, holding period (days).
+- Config: leverage (e.g. 4x), daily interest rate %, tax rate %.
+- Outputs: margin required vs loan amount, gross profit and %, interest and fees, net profit, returns with/without MTF, breakeven %, and a line-item fee breakdown for transparency.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech stack
+- React 19 + Vite
+- Tailwind CSS
+- `vite-plugin-singlefile` for a portable production bundle
+- ESLint for linting
